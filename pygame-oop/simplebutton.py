@@ -7,11 +7,12 @@ class SimpleButton():
     STATE_ARMED = 'armed' #buttown down and mouse over button
     STATE_DISARMED = 'disarmed' #clicked then rolled off
 
-    def __init__(self, window, loc, up, down) -> None:
+    def __init__(self, window, loc, up, down, callBack=None) -> None:
         self.window = window
         self.loc = loc
         self.surfaceUp = pygame.image.load(up)
-        self.surfaceDown = pygame.image.load(down)  
+        self.surfaceDown = pygame.image.load(down)
+        self.callBack = callBack  
 
         # get the rect of the button
         self.rect = self.surfaceUp.get_rect()
@@ -32,6 +33,9 @@ class SimpleButton():
         elif self.state == SimpleButton.STATE_ARMED:
             if event.type == MOUSEBUTTONUP and self.rect.collidepoint(event.pos):
                 self.state = SimpleButton.STATE_IDLE
+                #if a callback was specified, call it back
+                if self.callBack != None:
+                    self.callBack()
                 return True #case clicked
 
             elif event.type == MOUSEMOTION and not self.rect.collidepoint(event.pos):

@@ -8,12 +8,13 @@ class RandomButton():
     STATE_ARMED = 'armed' #buttown down and mouse over button
     STATE_DISARMED = 'disarmed' #clicked then rolled off
 
-    def __init__(self, window, windowwidth, windowheight, up, down) -> None:
+    def __init__(self, window, windowwidth, windowheight, up, down, buttonNumber) -> None:
         self.window = window
         self.windowWidth = windowwidth
         self.windowHeight = windowheight
         self.surfaceUp = pygame.image.load(up)
-        self.surfaceDown = pygame.image.load(down)  
+        self.surfaceDown = pygame.image.load(down)
+        self.buttonNumber = buttonNumber
 
         # get the rect of the button
         self.rect = self.surfaceUp.get_rect()
@@ -72,3 +73,6 @@ class RandomButton():
             self.window.blit(self.surfaceDown, self.loc)
         else: #idle or disarmed
             self.window.blit(self.surfaceUp, self.loc)
+
+    def getNumber(self):
+        return self.buttonNumber

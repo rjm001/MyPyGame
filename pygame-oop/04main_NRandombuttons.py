@@ -28,7 +28,7 @@ for oBallCnt in range(0, N_BALLS):
     ballList.append(oBall)
 buttonList = []
 for oButtonCnt in range(0, N_BUTTONS):
-    oButton = RandomButton(window, WINDOW_WIDTH, WINDOW_HEIGHT, 'images/buttonUp.png', 'images/buttonDown.png')
+    oButton = RandomButton(window, WINDOW_WIDTH, WINDOW_HEIGHT, 'images/buttonUp.png', 'images/buttonDown.png', oButtonCnt)
     buttonList.append(oButton)
 
 # 6 - Game Loop
@@ -40,7 +40,8 @@ while True:
             sys.exit()
     for oButton in buttonList:
         if oButton.handleEvent(event):
-            print("Button clicked!")
+            buttonNumber = oButton.getNumber()
+            print(f"Button {buttonNumber} clicked!")
             # reset all balls, for example
             for oBall in ballList:
                 oBall.reset()

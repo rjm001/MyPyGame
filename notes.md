@@ -28,3 +28,14 @@ PURPLE = (128, 0, 128)
 
 - `blit()` from bit block transfer. effectively means draw.
 - `<soundVariable> = pygame.mixer.Sound(<patah to sound file>)`
+- `<soundVariable>.play()`
+- In an OOP environment, the interface is the set of methods in a class and their related parameters--also known as the API. The implementation is the actual code of the methods in the class.
+- *callback*: a function or method of an object that is called when a particular action, event, or condition happens.
+    - can either add a callBack function or check for the value returned by a call to handleEvent().
+    - e.g., `if oButton.handleEvent(event): print('the button was clicked')`
+    - alternative is with callbacks. See `pygame-oop/06main_simplebuttoncallback.py`
+
+## Useful Bash
+
+- `pwd` is present working directory
+- `find . -name "boing.wav"` #to find a file in subdirectory starting here with name "boing.wav"
