@@ -1,2 +1,4 @@
 .idea*
 *.pycache*
+pygame-oop/__pycache__/*
+pygame-basics/__pycache__/*
