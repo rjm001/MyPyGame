@@ -5,7 +5,7 @@ from pygame.locals import *
 import pygwidgets
 import sys
 import pygame
-from BalloonConstants import *
+from BalloonConstants import * # does it matter where we import these. Obviously, yes. We don't want to be overwriting them some places. Then again, since they are constants, they can probably be imported everywhere.
 from BalloonMgr import *
 
 # 2 - Define Constants
