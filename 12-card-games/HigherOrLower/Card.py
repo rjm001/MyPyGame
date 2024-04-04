@@ -4,7 +4,7 @@ import pygame
 import pygwidgets
 
 class Card():
-    BACK_OF_CARD_IMAGE = pygame.image.load('images/BackOfCard.png')
+    BACK_OF_CARD_IMAGE = pygame.image.load('images/BackOfCard.png') #access it with Card.BACK_OF_CARD_IMAGE
     def __init__(self, window, rank, suit, value):
         self.window = window
         self.rank = rank
@@ -14,7 +14,7 @@ class Card():
         fileName = 'images/' + self.cardName + '.png'
         # Set some starting location; use setLoc below to change
         # its the window, starting location, dictionary of images, default image to start
-        self.images = pygwidgets.ImageCollection(window, (0,0), {'front': fileName, 'back': CARD.BACK_OF_CARD_IMAGE}, 'back')
+        self.images = pygwidgets.ImageCollection(window, (0,0), {'front': fileName, 'back': Card.BACK_OF_CARD_IMAGE}, 'back') #note how you access class variable
     #
     def conceal(self):
         self.images.replace('back')
