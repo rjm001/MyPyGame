@@ -60,22 +60,22 @@ while True:
             if gameOver:
                 higherButton.disable()
                 lowerButton.disable()
-        # 8 - do any "per frame" actions
-        ##
-        # 9 - Clear the window before drawing it again
-        background.draw()
-        # 10 - Draw the window elements
-        ## Tell teh game to draw itself
-        oGame.draw()
-        # Draw remaining user interface components
-        newGameButton.draw()
-        higherButton.draw()
-        lowerButton.draw()
-        quitButton.draw()
-        # 11 - Update the window
-        pygame.display.update()
-        # 12 - Slow things down a bit
-        clock.tick(FRAMES_PER_SECOND)
+    # 8 - do any "per frame" actions
+    ##
+    # 9 - Clear the window before drawing it again
+    background.draw()
+    # 10 - Draw the window elements
+    ## Tell teh game to draw itself
+    oGame.draw()
+    # Draw remaining user interface components
+    newGameButton.draw()
+    higherButton.draw()
+    lowerButton.draw()
+    quitButton.draw()
+    # 11 - Update the window
+    pygame.display.update()
+    # 12 - Slow things down a bit
+    clock.tick(FRAMES_PER_SECOND)
 
 
 

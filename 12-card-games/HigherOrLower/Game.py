@@ -64,7 +64,7 @@ class Game():
         self.cardNumber = self.cardNumber + 1
         self.showCard(self.cardNumber)
         nextCardName, nextCardValue = self.getCardNameAndValue(self.cardNumber)
-        #
+        # note, ties go to house!
         if higherOrLower == HIGHER:
             if nextCardValue > self.currentCardValue:
                 self.score = self.score + Game.POINTS_CORRECT
