@@ -61,38 +61,45 @@ while True:
 
 
 
-while True:
-    print()
-    for player in players:
-        print(f"{player}'s score: {score[player]}")
-    print('Choose a question category:')
-    print('Easy - 1 pt')
-    print('Medium - 1 pt')
-    print('Movie - 1 pt')
-    print('Hard - 1 pt')
-    print('Very Hard - 1 pt')
-    print('Facts - 1 pt')
-    print('Press q to quit')
 
-    for i in range(5):
+for i in range(7):
+    for big_player in players:
         for player in players:
-            action = input(f'{player}, what topic do you want?')
-            #
-            if action in trivia_dict.keys():
-                trivia_dict[action].return_question()
-                guess = input('Take a guess!')
-                trivia_dict[action].return_question()
-                is_correct = input('Were you correct? Y or N')
-                while True:
-                    if is_correct == 'Y':
-                        score[player] += 1
-                        break
-                    elif is_correct == 'N':
-                        print('Sorry, no points')
-                        break
-            elif action == 'q':
-                break
-            else:
-                print('Make sure your action is in the keys! Or type q to skip your turn')
+            print(f"{player}'s score: {score[player]}")
+        print('\n')
+        print('Choose a question category:')
+        print('Easy - 1 pt')
+        print('Movie - 1 pt')
+        print('Medium - 2 pt')
+        print('Hard - 2 pt')
+        print('Very Hard - 3 pt')
+        print('Facts - 3 pt')
+        print('Press q to quit')
 
-print('Done')
+        action = input(f'{big_player}, what topic do you want?')
+        #
+        if action in trivia_dict.keys():
+            trivia_dict[action].return_question()
+            guess = input('Take a guess!')
+            trivia_dict[action].return_answer()
+            is_correct = input('Were you correct? Y or N? ')
+            print('\n\n\n\n\n\n\n\n')
+            if is_correct == 'Y':
+                print('Yes! You got a point!')
+                if action == 'Facts' or action == 'Very Hard':
+                    score[big_player] += 3
+                elif action == 'Hard' or action == 'Medium':
+                    score[big_player] += 2
+                else:
+                    score[big_player] += 1
+            elif is_correct == 'N':
+                print('Sorry, no points')
+        elif action == 'q':
+            break
+        else:
+            print('Make sure your action is in the keys! Or type q to skip this round')
+
+
+print('Final Scores')
+for player in players:
+    print(f"{player}'s score: {score[player]}")
