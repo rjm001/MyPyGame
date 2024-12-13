@@ -1,0 +1,98 @@
+import pandas as pd
+df = pd.read_csv('triviacombined.tsv',delimiter="\t")
+dfg = df.groupby('Category')
+trivia_dict = {}
+categories = []
+
+class CategoryQandA:
+    def __init__(self, category, questions: list, answers: list):
+        self.category = category
+        self.questions = questions
+        self.current_question = ""
+        self.answers = answers
+        self.current_answer = ""
+        self.get_question_count()
+    # If I want to randomly shuffle, I can do it here, at start. randomly shuffle the range and apply the same transform to questions and answers
+    #
+    def get_question_count(self):
+        self.question_count = len(self.questions)
+    #
+    def return_question(self):
+        if self.question_count > 0:
+            self.current_question = self.questions.pop()
+            self.current_answer = self.answers.pop()
+            print(self.current_question)
+            # wait
+            # adjust score. next
+            self.get_question_count()
+        else: 
+            print('No more questions. Choose another category')
+            # to do, redirect to category
+    #
+    def return_answer(self):
+        print(self.current_answer)
+
+for name, group in dfg:
+    categories.append(name)
+    #print(f"Name: {name}. Group: {group.head()}")
+    trivia_dict[name] = CategoryQandA(name, group.Question.to_list(), group.Answer.to_list() )
+
+players = []
+from collections import defaultdict
+score = defaultdict(int)
+while True:
+    print()
+    print('Welcome to the christmas game')
+    print('When done entering players, type n!')
+    if len(players) >0:
+        for player in players:
+            print(f"{player}'s score: {score[player]}")
+
+    action = input("Enter players name?")
+
+    print('\n\n\n\n\n')
+
+    if action == 'n':
+        break
+    else:
+        players.append(str(action))
+        score[action] = 0
+
+
+
+
+while True:
+    print()
+    for player in players:
+        print(f"{player}'s score: {score[player]}")
+    print('Choose a question category:')
+    print('Easy - 1 pt')
+    print('Medium - 1 pt')
+    print('Movie - 1 pt')
+    print('Hard - 1 pt')
+    print('Very Hard - 1 pt')
+    print('Facts - 1 pt')
+    print('Press q to quit')
+
+    for i in range(5):
+        for player in players:
+            action = input(f'{player}, what topic do you want?')
+            #
+            if action in trivia_dict.keys():
+                trivia_dict[action].return_question()
+                guess = input('Take a guess!')
+                trivia_dict[action].return_question()
+                is_correct = input('Were you correct? Y or N')
+                while True:
+                    if is_correct == 'Y':
+                        score[player] += 1
+                        break
+                    elif is_correct == 'N':
+                        print('Sorry, no points')
+                        break
+            elif action == 'q':
+                break
+            else:
+                print('Make sure your action is in the keys! Or type q to skip your turn')
+
+print('Done')
