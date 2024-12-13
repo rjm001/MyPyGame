@@ -50,9 +50,10 @@ while True:
 
     action = input("Enter players name?")
 
-    print('\n\n\n\n\n')
+    print('\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n')
 
     if action == 'n':
+        print('\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n')
         break
     else:
         players.append(str(action))
@@ -67,37 +68,65 @@ for i in range(7):
         for player in players:
             print(f"{player}'s score: {score[player]}")
         print('\n')
-        print('Choose a question category:')
+        print(f'{big_player}, choose a question category:')
         print(f'Easy - 1 pt. {trivia_dict["Easy"].question_count} Qs Remaining')
-        print(f'Movie - 1 pt. {trivia_dict["Movie"].question_count} Qs Remaining')
+        print(f'Movie - 2 pt. {trivia_dict["Movie"].question_count} Qs Remaining')
         print(f'Medium - 2 pt. {trivia_dict["Medium"].question_count} Qs Remaining')
         print(f'Hard - 2 pt. {trivia_dict["Hard"].question_count} Qs Remaining')
         print(f'Very Hard - 3 pt. {trivia_dict["Very Hard"].question_count} Qs Remaining')
         print(f'Facts - 3 pt. {trivia_dict["Facts"].question_count} Qs Remaining')
         print('Press q to quit')
+        print('\n\n\n\n')
+        action = ""
+        total_questions = 0
+        category_qs_remaining = 0
+        for cat in trivia_dict:
+            total_questions += trivia_dict[cat].question_count
+            category_qs_remaining = max(category_qs_remaining, trivia_dict[cat].question_count) 
 
-        action = input(f'{big_player}, what topic do you want?')
-        #
-        if action in trivia_dict.keys():
+        print(f'Total questions remaining: {total_questions}')
+        if total_questions < 1:
+            print("That's the end of the game!")
+            break
+        
+
+        while ( (action not in trivia_dict.keys()) or (category_qs_remaining==0)):
+            action = input(f'{big_player}, what question category do you want? ')
+            if action in trivia_dict.keys():
+                category_qs_remaining = trivia_dict[action].question_count
+                if category_qs_remaining == 0:
+                    print('Please select a category with questions remaining')
+                    print(f'Current selection has {category_qs_remaining} questions remaining')
+                    print('\n')
+        
+        if action in trivia_dict.keys() and category_qs_remaining>0:
             trivia_dict[action].return_question()
-            guess = input('Take a guess!')
+            guess = input('Take a guess! ')
             trivia_dict[action].return_answer()
-            is_correct = input('Were you correct? Y or N? ')
-            print('\n\n\n\n\n\n\n\n')
-            if is_correct == 'Y':
-                print('Yes! You got a point!')
-                if action == 'Facts' or action == 'Very Hard':
-                    score[big_player] += 3
-                elif action == 'Hard' or action == 'Medium':
-                    score[big_player] += 2
+            while True:
+                is_correct = input('Were you correct? Y or N? ')
+                print('\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n')
+                if is_correct == 'Y':
+                    print('Yes! You earned points!')
+                    print('\n')
+                    if action == 'Facts' or action == 'Very Hard':
+                        score[big_player] += 3
+                    elif action == 'Hard' or action == 'Medium' or action == 'Movie':
+                        score[big_player] += 2
+                    else:
+                        score[big_player] += 1
+                    break
+                elif is_correct == 'N':
+                    print('Sorry, no points')
+                    print('\n')
+                    break
                 else:
-                    score[big_player] += 1
-            elif is_correct == 'N':
-                print('Sorry, no points')
+                    print('Please type Y or N')
+                
         elif action == 'q':
             break
         else:
-            print('Make sure your action is in the keys! Or type q to skip this round')
+            print('Make sure your Category is a Real Category!')
 
 
 print('Final Scores')
